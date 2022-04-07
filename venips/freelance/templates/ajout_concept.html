@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Freelance
+{% endblock %}
+{% block content %}
+ <div class="container-fluid">
+
+{% include 'menu.html' %}
+</div>
+
+    <form action="" method="post" enctype="multipart/form-data" style="margin-top: 8em;">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="btn btn-primary" value="Enregistrer">
+    </form>
+
+{% include 'footer.html'%}
+{% endblock %}

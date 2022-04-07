@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+annonces
+{% endblock %}
+{% block content %}
+ <div class="container-fluid">
+    {% include 'menu.html' %}
+        <div class="container">
+        <div class="row " style="margin-top: 10em;margin-bottom: 10em;">
+            <div class="col-lg-2 col-md-2 text-center   " style="border-right: 1px solid black;border-bottom:1px solid black; box-shadow: 2px 1px 2px black;">
+                {% for i in unique  %}
+                <a href="{{i.nomfreelance.profil.url}} "target="_blank"><img src=" {{i.nomfreelance.profil.url}}" class="rounded-circle img-fluid" alt="" width="125"></a> <br>
+                {{i.nomfreelance.nomclient}} <br>
+                {{i.nomfreelance.prenomclient}} <br>
+                <span style="color: blue;" > {{i.nomfreelance.emailclient}} <br></span>
+                {{i.nomfreelance.numero}} <br>
+                {% empty %}
+                <div class="text-danger text-center">
+                    ce freelance n'a rien publier 
+                </div>
+             
+                {% endfor %}
+            </div>
+            
+            <div class="col-lg-10">
+                <div class="row">
+                    {% for i in freepub  %}
+                        <div class="col-lg-3 col-md-4 ">
+                            <a href="{{i.img_concept.url}}" target="_blank"> <img src="{{i.img_concept.url}}" alt="" class="img-fluid img-thumbnail"> </a><br>
+                            <p class="text-center text-success bg-dark text-white" style="font-weight: bold;">{{ i.description_concept }}</p>
+
+                        </div>
+                  
+                    {% endfor %}
+                </div>
+            </div>    
+                
+               
+
+           
+        </div>
+    </div>
+     
+    {% include 'footer.html'%}
+</div>
+{% endblock%}

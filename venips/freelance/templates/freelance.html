@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Freelance
+{% endblock %}
+{% block content %}
+ <div class="container-fluid">
+    {% include 'menu.html' %}
+
+
+<div class="row  " style="margin-top: 8em;">
+    <div class="col-12">
+    <form action="{% url 'recherche_freelance' %}" method="Get" >
+        <input type="text" class="input" name="qualite" placeholder="Rechercher un Freelance par rapport ses qualités" style="width: 25em;margin-left: 1em;height: 2.5em;border-radius: 4em;">
+        <input type="submit" required value="rechercher" class=" btn btn-primary" style="color: white;">
+        {% if user.is_authenticated %}
+        <a href="{% url 'ajout' %}" ><img src="{% static 'img/plus.svg' %}" width="36px" alt=""></a>
+        {% else %}
+        <a href="{% url 'connexion' %}" ><img src="{% static 'img/plus.svg' %}" width="36px" alt=""></a>
+        {% endif %}
+      
+    </form>
+    <p class="offset-lg-8 offset-md-8  col-12 bg-warning text-capitalize " style="font-size: 1.5em;">Il y'a {{ qtf }} freelance{{ qtf|pluralize }} disponible{{ qtf|pluralize }}.</p>
+
+    </div>
+</div>
+
+    <div class="row">
+      {% for i in free reversed %}
+      <div class="col-sm-12 col-md-4 col-lg-3" style="margin-top: 1em;">
+        <div class="card h-100 "  >
+          <a href="{% url 'profile' i.nomfree.id %}">
+            <img
+              src="{{i.nomfree.profil.url}} "
+              class="card-img-top "  height="280px"
+              alt="..."
+              
+            /></a>
+        
+      <div class="card-body" >
+        <h5 class="card-title">{{ i.nomfree.nomclient }} {{ i.nomfree.prenomclient }}</h5>
+        <p class="card-text">
+       <!-- {{i.description|truncatewords:10}} <br>--> 
+        </p>
+        <p>prix : {{ i.prix_jours }} GNF/jours</p> 
+        <span style="border-radius: 4px 4px ;" class="text-primary text-uppercase">{{ i.qualite }}</span> 
+        
+      </div>
+    </div>
+  </div>
+      {% endfor %}
+  
+
+    
+</div>
+
+
+
+</div>
+
+</div>
+</div>
+
+
+      
+{% include 'footer.html'%}
+
+{% endblock%}
